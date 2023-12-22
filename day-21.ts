@@ -60,48 +60,26 @@ type GetState<
         ? "❌ Won"
         : CheckWinBoard<Board, "⭕"> extends true
         ? "⭕ Won"
-        : CheckDraw<Board> extends true
+        : Board extends FullBoard
         ? "Draw"
         : State extends "❌"
         ? "⭕"
         : "❌"
     : State;
 
-type CheckDraw<Board extends TicTactToeBoard> = CheckDrawLine<Board[0]> extends false
-    ? false
-    : CheckDrawLine<Board[1]> extends false
-    ? false
-    : CheckDrawLine<Board[2]> extends false
-    ? false
-    : true;
-
-type CheckDrawLine<Line extends TicTacToeCell[]> = Line[0] extends TicTacToeEmptyCell
-    ? false
-    : Line[1] extends TicTacToeEmptyCell
-    ? false
-    : Line[2] extends TicTacToeEmptyCell
-    ? false
-    : true;
-
-type CheckWinBoard<
-    Board extends TicTactToeBoard,
-    Chip extends TicTacToeChip,
-    WinComb = [Chip, Chip, Chip]
-> = Board[0] extends WinComb
-    ? true
-    : Board[1] extends WinComb
-    ? true
-    : Board[2] extends WinComb
-    ? true
-    : [Board[0][0], Board[1][0], Board[2][0]] extends WinComb
-    ? true
-    : [Board[0][1], Board[1][1], Board[2][1]] extends WinComb
-    ? true
-    : [Board[0][2], Board[1][2], Board[2][2]] extends WinComb
-    ? true
-    : [Board[0][0], Board[1][1], Board[2][2]] extends WinComb
-    ? true
-    : [Board[2][0], Board[1][1], Board[0][2]] extends WinComb
+type CheckWinBoard<Board extends TicTactToeBoard, Chip extends TicTacToeChip> = [
+    Chip,
+    Chip,
+    Chip
+] extends
+    | Board[0] // 1 row
+    | Board[1] // 2 row
+    | Board[2] // 3 row
+    | [Board[0][0], Board[1][0], Board[2][0]] // 1 column
+    | [Board[0][1], Board[1][1], Board[2][1]] // 2 column
+    | [Board[0][2], Board[1][2], Board[2][2]] // 3 column
+    | [Board[0][0], Board[1][1], Board[2][2]] // diagonal from top-left to bottom-right
+    | [Board[2][0], Board[1][1], Board[0][2]] // diagonal from bottom-left to top-right
     ? true
     : false;
 
@@ -122,6 +100,11 @@ type TicTacToeGame = {
 };
 
 type EmptyBoard = [["  ", "  ", "  "], ["  ", "  ", "  "], ["  ", "  ", "  "]];
+type FullBoard = [
+    [TicTacToeChip, TicTacToeChip, TicTacToeChip],
+    [TicTacToeChip, TicTacToeChip, TicTacToeChip],
+    [TicTacToeChip, TicTacToeChip, TicTacToeChip]
+];
 
 type NewGame = {
     board: EmptyBoard;
