@@ -1,4 +1,4 @@
-import { Expect, Equal } from "./test";
+import { Expect, Equal } from "../test";
 
 /**
  * **Box The Toys!**
@@ -43,9 +43,7 @@ import { Expect, Equal } from "./test";
  *
  * But there's one little thing.. We need to support the number of boxes being a union. That means our resulting tuple can also be a union. Check out `test_nutcracker` in the tests to see how that works.
  */
-type BoxToys<S extends string, N extends number> = N extends 1
-    ? [S]
-    : [S, ...BoxToys<S, Decrement[N]>];
+type BoxToys<S extends string, N extends number> = N extends 1 ? [S] : [S, ...BoxToys<S, Decrement[N]>];
 
 type Decrement = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 

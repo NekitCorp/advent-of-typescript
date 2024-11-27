@@ -1,4 +1,4 @@
-import { Expect, Equal } from "./test";
+import { Expect, Equal } from "../test";
 
 /**
  * **What is Tic Tac Toe?**
@@ -20,10 +20,7 @@ type TicTacToe<
             ? Game["board"][TicTacToeYPositionsIndex[Vert]][TicTacToeXPositionsIndex[Horz]] extends TicTacToeEmptyCell
                 ? {
                       board: GetBoard<Game["board"], Vert, Horz, Game["state"]>;
-                      state: GetState<
-                          GetBoard<Game["board"], Vert, Horz, Game["state"]>,
-                          Game["state"]
-                      >;
+                      state: GetState<GetBoard<Game["board"], Vert, Horz, Game["state"]>, Game["state"]>;
                   }
                 : Game
             : never
@@ -42,20 +39,13 @@ type GetBoard<
           Vert extends "bottom" ? GetBoardLine<Board[2], Horz, State> : Board[2]
       ]
     : Board;
-type GetBoardLine<
-    Line extends TicTacToeCell[],
-    Horz extends TicTacToeXPositions,
-    Chip extends TicTacToeChip
-> = [
+type GetBoardLine<Line extends TicTacToeCell[], Horz extends TicTacToeXPositions, Chip extends TicTacToeChip> = [
     Horz extends "left" ? Chip : Line[0],
     Horz extends "center" ? Chip : Line[1],
     Horz extends "right" ? Chip : Line[2]
 ];
 
-type GetState<
-    Board extends TicTactToeBoard,
-    State extends TicTacToeState
-> = State extends TicTacToeChip
+type GetState<Board extends TicTactToeBoard, State extends TicTacToeState> = State extends TicTacToeChip
     ? CheckWinBoard<Board, "❌"> extends true
         ? "❌ Won"
         : CheckWinBoard<Board, "⭕"> extends true
@@ -67,11 +57,7 @@ type GetState<
         : "❌"
     : State;
 
-type CheckWinBoard<Board extends TicTactToeBoard, Chip extends TicTacToeChip> = [
-    Chip,
-    Chip,
-    Chip
-] extends
+type CheckWinBoard<Board extends TicTactToeBoard, Chip extends TicTacToeChip> = [Chip, Chip, Chip] extends
     | Board[0] // 1 row
     | Board[1] // 2 row
     | Board[2] // 3 row

@@ -1,4 +1,4 @@
-import { Expect, Equal } from "./test";
+import { Expect, Equal } from "../test";
 
 /**
  * **Reindeer Sudoku**
@@ -60,9 +60,7 @@ type Validate<Grid extends Reindeer[][][]> = false extends
 
 // Rows
 
-type ValidateRow<Grid extends Reindeer[][][], RowIndex extends number> = ValidateArray<
-    GetRow<Grid, RowIndex>
->;
+type ValidateRow<Grid extends Reindeer[][][], RowIndex extends number> = ValidateArray<GetRow<Grid, RowIndex>>;
 
 type GetRow<Grid extends Reindeer[][][], RowIndex extends number> = [
     ...Grid[RowIndex][0],

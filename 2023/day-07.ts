@@ -1,4 +1,4 @@
-import { Expect, Equal } from "./test";
+import { Expect, Equal } from "../test";
 
 /**
  * **Filtering The Children (part 2)**

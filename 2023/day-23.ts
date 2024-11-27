@@ -1,4 +1,4 @@
-import { Expect, Equal } from "./test";
+import { Expect, Equal } from "../test";
 
 /**
  * **Connect 4, but in TypeScript types**
@@ -128,49 +128,48 @@ type CheckWinDiagonals<TBoard extends Connect4Cell[][]> = TBoard extends [
         : CheckWinDiagonals<[...Rest, Last4, Last3, Last2]>
     : null;
 
-type CheckWinDiagonalsRows<
-    TRows extends [Connect4Cell[], Connect4Cell[], Connect4Cell[], Connect4Cell[]]
-> = TRows extends [
-    [
-        infer Cell41 extends Connect4Cell,
-        infer Cell42 extends Connect4Cell,
-        infer Cell43 extends Connect4Cell,
-        infer Cell44 extends Connect4Cell,
-        ...infer Rest4 extends Connect4Cell[]
-    ],
-    [
-        infer Cell31 extends Connect4Cell,
-        infer Cell32 extends Connect4Cell,
-        infer Cell33 extends Connect4Cell,
-        infer Cell34 extends Connect4Cell,
-        ...infer Rest3 extends Connect4Cell[]
-    ],
-    [
-        infer Cell21 extends Connect4Cell,
-        infer Cell22 extends Connect4Cell,
-        infer Cell23 extends Connect4Cell,
-        infer Cell24 extends Connect4Cell,
-        ...infer Rest2 extends Connect4Cell[]
-    ],
-    [
-        infer Cell11 extends Connect4Cell,
-        infer Cell12 extends Connect4Cell,
-        infer Cell13 extends Connect4Cell,
-        infer Cell14 extends Connect4Cell,
-        ...infer Rest1 extends Connect4Cell[]
+type CheckWinDiagonalsRows<TRows extends [Connect4Cell[], Connect4Cell[], Connect4Cell[], Connect4Cell[]]> =
+    TRows extends [
+        [
+            infer Cell41 extends Connect4Cell,
+            infer Cell42 extends Connect4Cell,
+            infer Cell43 extends Connect4Cell,
+            infer Cell44 extends Connect4Cell,
+            ...infer Rest4 extends Connect4Cell[]
+        ],
+        [
+            infer Cell31 extends Connect4Cell,
+            infer Cell32 extends Connect4Cell,
+            infer Cell33 extends Connect4Cell,
+            infer Cell34 extends Connect4Cell,
+            ...infer Rest3 extends Connect4Cell[]
+        ],
+        [
+            infer Cell21 extends Connect4Cell,
+            infer Cell22 extends Connect4Cell,
+            infer Cell23 extends Connect4Cell,
+            infer Cell24 extends Connect4Cell,
+            ...infer Rest2 extends Connect4Cell[]
+        ],
+        [
+            infer Cell11 extends Connect4Cell,
+            infer Cell12 extends Connect4Cell,
+            infer Cell13 extends Connect4Cell,
+            infer Cell14 extends Connect4Cell,
+            ...infer Rest1 extends Connect4Cell[]
+        ]
     ]
-]
-    ? CheckWinArray<[Cell11, Cell22, Cell33, Cell44]> extends Connect4Chips
-        ? CheckWinArray<[Cell11, Cell22, Cell33, Cell44]>
-        : CheckWinDiagonalsRows<
-              [
-                  [Cell42, Cell43, Cell44, ...Rest4],
-                  [Cell32, Cell33, Cell34, ...Rest3],
-                  [Cell22, Cell23, Cell24, ...Rest2],
-                  [Cell12, Cell13, Cell14, ...Rest1]
-              ]
-          >
-    : null;
+        ? CheckWinArray<[Cell11, Cell22, Cell33, Cell44]> extends Connect4Chips
+            ? CheckWinArray<[Cell11, Cell22, Cell33, Cell44]>
+            : CheckWinDiagonalsRows<
+                  [
+                      [Cell42, Cell43, Cell44, ...Rest4],
+                      [Cell32, Cell33, Cell34, ...Rest3],
+                      [Cell22, Cell23, Cell24, ...Rest2],
+                      [Cell12, Cell13, Cell14, ...Rest1]
+                  ]
+              >
+        : null;
 
 type CheckWinArray<
     Array extends Connect4Cell[],
@@ -392,9 +391,7 @@ type test_diagonal_yellow_win_expected = {
     state: "🟡 Won";
 };
 
-type test_diagonal_yellow_win = Expect<
-    Equal<test_diagonal_yellow_win_actual, test_diagonal_yellow_win_expected>
->;
+type test_diagonal_yellow_win = Expect<Equal<test_diagonal_yellow_win_actual, test_diagonal_yellow_win_expected>>;
 
 type test_draw_actual = Connect4<
     {

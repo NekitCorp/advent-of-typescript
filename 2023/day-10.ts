@@ -1,4 +1,4 @@
-import { Expect, Equal } from "./test";
+import { Expect, Equal } from "../test";
 
 /**
  * **Christmas Street Suffix Tester**
@@ -21,9 +21,7 @@ import { Expect, Equal } from "./test";
  *
  * If the street ends with the suffix then the type should return `true` (otherwise, `false`).
  */
-type StreetSuffixTester<T extends string, S extends string> = T extends `${string}${S}`
-    ? true
-    : false;
+type StreetSuffixTester<T extends string, S extends string> = T extends `${string}${S}` ? true : false;
 
 // *************************************************************************************
 // ***                                    Tests                                      ***

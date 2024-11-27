@@ -1,4 +1,4 @@
-import { Expect, Equal } from "./test";
+import { Expect, Equal } from "../test";
 
 /**
  * **Help Santa Embezzle Funds**
@@ -54,11 +54,9 @@ type Cycle = ["🛹", "🚲", "🛴", "🏄"];
 
 type Dec<N extends any[]> = N extends [unknown, ...infer T] ? T : never;
 
-type Enumerate<
-    N extends number,
-    S extends string,
-    Acc extends string[] = []
-> = Acc["length"] extends N ? Acc : Enumerate<N, S, [...Acc, S]>;
+type Enumerate<N extends number, S extends string, Acc extends string[] = []> = Acc["length"] extends N
+    ? Acc
+    : Enumerate<N, S, [...Acc, S]>;
 
 // *************************************************************************************
 // ***                                    Tests                                      ***

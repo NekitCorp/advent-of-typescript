@@ -1,4 +1,4 @@
-import { Expect, Equal } from "./test";
+import { Expect, Equal } from "../test";
 
 /**
  * **Is Santa Dyslexic?**
@@ -21,9 +21,7 @@ import { Expect, Equal } from "./test";
  *
  * [Santa] Look, this is just an MVP. We can add accessibility later. Just get me my `Reverse` type! I'm having a hard time reading this stuff otherwise!
  */
-type Reverse<T extends string> = T extends `${infer First}${infer Rest}`
-    ? `${Reverse<Rest>}${First}`
-    : T;
+type Reverse<T extends string> = T extends `${infer First}${infer Rest}` ? `${Reverse<Rest>}${First}` : T;
 
 // *************************************************************************************
 // ***                                    Tests                                      ***

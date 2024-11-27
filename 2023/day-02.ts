@@ -1,4 +1,4 @@
-import { Expect, Equal } from "./test";
+import { Expect, Equal } from "../test";
 
 /**
  * **Christmas Cookie Inventory**
@@ -28,12 +28,7 @@ const cookieInventory = {
 };
 type test_cookies_actual = CookieSurveyInput<typeof cookieInventory>;
 //   ^?
-type test_cookies_expected =
-    | "chocolate"
-    | "sugar"
-    | "gingerBread"
-    | "peanutButter"
-    | "snickeDoodle";
+type test_cookies_expected = "chocolate" | "sugar" | "gingerBread" | "peanutButter" | "snickeDoodle";
 type test_cookies = Expect<Equal<test_cookies_actual, test_cookies_expected>>;
 
 const unrelated = {

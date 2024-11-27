@@ -1,4 +1,4 @@
-import { Expect, Equal } from "./test";
+import { Expect, Equal } from "../test";
 
 /**
  * **Filtering The Children (part 3)**
@@ -34,9 +34,7 @@ import { Expect, Equal } from "./test";
  * Off to the tests to see how this is actually supposed to work!
  */
 type RemoveNaughtyChildren<Type> = {
-    [Property in keyof Type as Property extends `naughty_${string}`
-        ? never
-        : Property]: Type[Property];
+    [Property in keyof Type as Property extends `naughty_${string}` ? never : Property]: Type[Property];
 };
 
 // *************************************************************************************

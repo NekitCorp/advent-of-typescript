@@ -1,5 +1,5 @@
-import { Equal, Expect } from "./test";
-import { Decrement, Increment } from "./utils";
+import { Equal, Expect } from "../test";
+import { Decrement, Increment } from "../utils";
 
 /**
  * **Santa is stuck!**
@@ -53,10 +53,7 @@ type FindSantaColumnPosition<TRow extends MazeItem[]> = TRow extends [
         : FindSantaColumnPosition<Rest>
     : null;
 
-type NextPosition<
-    TPosition extends Position,
-    TDirection extends Directions
-> = TDirection extends "up"
+type NextPosition<TPosition extends Position, TDirection extends Directions> = TDirection extends "up"
     ? [Decrement<TPosition[0]>, TPosition[1]]
     : TDirection extends "right"
     ? [TPosition[0], Increment<TPosition[1]>]
@@ -68,15 +65,11 @@ type NextPosition<
 
 // Move santa
 
-type MoveSanta<
-    TMaze extends MazeMatrix,
-    TPosition extends Position,
-    TNextPosition extends Position
-> = TMaze extends [...infer Rest extends MazeItem[][], infer Last extends MazeItem[]]
-    ? [
-          ...MoveSanta<Rest, TPosition, TNextPosition>,
-          MoveSantaColumn<Last, Rest["length"], TPosition, TNextPosition>
-      ]
+type MoveSanta<TMaze extends MazeMatrix, TPosition extends Position, TNextPosition extends Position> = TMaze extends [
+    ...infer Rest extends MazeItem[][],
+    infer Last extends MazeItem[]
+]
+    ? [...MoveSanta<Rest, TPosition, TNextPosition>, MoveSantaColumn<Last, Rest["length"], TPosition, TNextPosition>]
     : [];
 
 type MoveSantaColumn<
@@ -97,14 +90,11 @@ type MoveSantaColumn<
 
 // Position checkers
 
-type IsBlock<
-    TMaze extends MazeMatrix,
-    TPosition extends Position
-> = TMaze[TPosition[0]][TPosition[1]] extends "🎄" ? true : false;
+type IsBlock<TMaze extends MazeMatrix, TPosition extends Position> = TMaze[TPosition[0]][TPosition[1]] extends "🎄"
+    ? true
+    : false;
 
-type IsFinish<TMaze extends MazeMatrix, TPosition extends Position> = TPosition[0] extends
-    | -1
-    | TMaze["length"]
+type IsFinish<TMaze extends MazeMatrix, TPosition extends Position> = TPosition[0] extends -1 | TMaze["length"]
     ? true
     : TPosition[1] extends -1 | TMaze[0]["length"]
     ? true

@@ -1,4 +1,4 @@
-import { Expect, Equal } from "./test";
+import { Expect, Equal } from "../test";
 
 /**
  * **TypeScript ASCII Art!**
@@ -30,10 +30,7 @@ import { Expect, Equal } from "./test";
  */
 type ToAsciiArt<S extends string> = ToAsciiArtUppercase<Uppercase<S>>;
 
-type ToAsciiArtUppercase<
-    S extends string,
-    R extends string[] = ["", "", ""]
-> = S extends `${infer First}${infer Rest}`
+type ToAsciiArtUppercase<S extends string, R extends string[] = ["", "", ""]> = S extends `${infer First}${infer Rest}`
     ? First extends keyof Letters
         ? ToAsciiArtUppercase<Rest, AddLetter<R, Letters[First]>>
         : First extends "\n"
@@ -41,11 +38,7 @@ type ToAsciiArtUppercase<
         : never
     : R;
 
-type AddLetter<R extends string[], L extends string[]> = [
-    `${R[0]}${L[0]}`,
-    `${R[1]}${L[1]}`,
-    `${R[2]}${L[2]}`
-];
+type AddLetter<R extends string[], L extends string[]> = [`${R[0]}${L[0]}`, `${R[1]}${L[1]}`, `${R[2]}${L[2]}`];
 
 // prettier-ignore
 type Letters = {
@@ -179,8 +172,7 @@ type test_2_expected = [
 ];
 type test_2 = Expect<Equal<test_2_actual, test_2_expected>>;
 
-type test_3_actual =
-    ToAsciiArt<"  : * : * : * : * : * : * : \n  Ecyrbe  \n  : * : * : * : * : * : * : ">;
+type test_3_actual = ToAsciiArt<"  : * : * : * : * : * : * : \n  Ecyrbe  \n  : * : * : * : * : * : * : ">;
 //   ^?
 type test_3_expected = [
     "░░#░░░#░░░#░░░#░░░#░░░#░░░#░",

@@ -1,4 +1,4 @@
-import { Expect, Equal } from "./test";
+import { Expect, Equal } from "../test";
 
 /**
  * **Naughty List Decipher**
@@ -31,9 +31,7 @@ import { Expect, Equal } from "./test";
  *
  * Let's get this done before the rest of the elves find out.
  */
-type DecipherNaughtyList<S> = S extends `${infer First}/${infer Rest}`
-    ? First | DecipherNaughtyList<Rest>
-    : S;
+type DecipherNaughtyList<S> = S extends `${infer First}/${infer Rest}` ? First | DecipherNaughtyList<Rest> : S;
 
 // *************************************************************************************
 // ***                                    Tests                                      ***

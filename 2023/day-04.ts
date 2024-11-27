@@ -1,4 +1,4 @@
-import { Expect, Equal } from "./test";
+import { Expect, Equal } from "../test";
 
 /**
  * **Christmas Present Delivery Addresses**
@@ -48,9 +48,7 @@ type test_MixedBehaviorTest_expected = {
     chris: Address;
     penny: Address;
 };
-type test_MixedBehaviorTest = Expect<
-    Equal<test_MixedBehaviorTest_actual, test_MixedBehaviorTest_expected>
->;
+type test_MixedBehaviorTest = Expect<Equal<test_MixedBehaviorTest_actual, test_MixedBehaviorTest_expected>>;
 
 type Unrelated = {
     hello: { hello: "hello" };
