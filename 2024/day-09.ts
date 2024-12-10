@@ -36,7 +36,6 @@ import { Expect, Equal } from "../test";
 declare module "santas-special-list" {
     export type Status = "naughty" | "nice";
     export type Child = {
-        // =>
         name: string;
         status: Status;
     };
