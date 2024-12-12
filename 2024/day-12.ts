@@ -23,6 +23,8 @@ import { Expect, Equal } from "../test";
  *
  * Help 🎩Bernard before 🎅Santa continues his violent tirade.
  *
+ * Help 🎩Bernard before 🎅Santa continues his violent tirade. He's not about to spend a bunch of time looking at each child so instead he's just deciding whether a child is naughty or nice based on the number of characters in their name!
+ *
  * A HUGE hint
  *
  * Part of the fun/trick of this challenge is that you can't solve it normally by iterating because you'll get:
@@ -84,14 +86,14 @@ type NaughtyOrNice = {
 };
 
 type FormatNames<T extends string[][]> = {
-    [I in keyof T]: T[I] extends [infer Name extends string, infer Rating extends string, infer Count extends string]
+    [K in keyof T]: T[K] extends [infer Name extends string, string, infer Count extends string]
         ? {
               name: Name;
               count: Count extends `${infer CountNum extends number}` ? CountNum : never;
               rating: NaughtyOrNice[Name & keyof NaughtyOrNice];
           }
         : never;
-} & { length: T["length"] };
+};
 
 // *************************************************************************************
 // ***                                    Tests                                      ***
