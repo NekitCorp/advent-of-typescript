@@ -28,6 +28,11 @@ type Demand<T, S extends In<T> = In<T>> = {
 // https://stackoverflow.com/questions/66410115/difference-between-variance-covariance-contravariance-bivariance-and-invarian
 type In<V> = (v: V) => V;
 
+// https://www.typescriptlang.org/docs/handbook/2/generics.html#variance-annotations
+// type Demand<in out T> = {
+//     demand: T;
+// };
+
 // *************************************************************************************
 // ***                                    Tests                                      ***
 // *************************************************************************************
