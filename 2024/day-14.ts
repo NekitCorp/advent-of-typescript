@@ -27,9 +27,7 @@ import { Expect, Equal } from "../test";
  *
  * Learn some more about how to create and type async functions that are also iterable (generators).
  */
-type PerfReview<T extends AsyncGenerator> = Exclude<AsyncReturnType<T["return"]>["value"], void>;
-
-type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (...args: any) => Promise<infer R> ? R : any;
+type PerfReview<T> = T extends AsyncGenerator<infer R, any, any> ? R : never;
 
 // *************************************************************************************
 // ***                                    Tests                                      ***
