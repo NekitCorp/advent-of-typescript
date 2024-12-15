@@ -25,15 +25,24 @@ import { Expect, Equal } from "../test";
  */
 type GetRoute<Str extends string> = BuildRoute<Trim<Str>>;
 
-type BuildRoute<Str extends string, DashCount extends number[] = []> = Str extends `-${infer RestStr}`
-    ? BuildRoute<RestStr, [...DashCount, 0]>
-    : Str extends `${infer Destination}-${infer RestStr}`
-    ? [[Destination, DashCount["length"]], ...BuildRoute<RestStr, [0]>]
-    : Str extends ""
-    ? []
-    : [[Str, DashCount["length"]]];
+// prettier-ignore
+type BuildRoute<
+	Str extends string,
+	DashCount extends number[] = [],
+> = Str extends `-${infer RestStr}`
+	? BuildRoute<RestStr, [...DashCount, 0]>
+	: Str extends `${infer Destination}-${infer RestStr}`
+		? [[Destination, DashCount["length"]], ...BuildRoute<RestStr, [0]>]
+		: Str extends ""
+			? []
+			: [[Str, DashCount["length"]]];
 
-type Trim<Str extends string> = Str extends `-${infer RestStr}` ? Trim<RestStr> : Str;
+// prettier-ignore
+type Trim<Str extends string> = Str extends `-${infer RestStr}`
+	? Trim<RestStr>
+	: Str extends `${infer RestStr}-`
+		? Trim<RestStr>
+		: Str;
 
 // *************************************************************************************
 // ***                                    Tests                                      ***
