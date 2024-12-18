@@ -43,7 +43,7 @@ import { Expect, Equal } from "../test";
  *
  * That won't work here. We're trying to signal to TypeScript not to dig in and match against the inner types to find candidates for type inference.
  */
-const createStreetLight = <T>(colors: T[], defaultColor: T extends T ? T : never): T => {
+const createStreetLight = <T>(colors: T[], defaultColor: NoInfer<T>) => {
     console.log(colors);
     return defaultColor;
 };
