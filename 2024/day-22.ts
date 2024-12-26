@@ -45,6 +45,8 @@ import { Expect, Equal } from "../test";
  */
 type Parse<T extends string> = Eval<T> extends [infer V, infer U] ? V : never;
 
+// Original: https://github.com/type-challenges/type-challenges/issues/6329
+
 // prettier-ignore
 type Eval<T>
   = T extends `${' '|'\n'|'\t'}${infer U}` ? Eval<U>
